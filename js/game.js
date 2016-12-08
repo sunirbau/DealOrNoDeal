@@ -9,7 +9,7 @@ window.onload = function() {
   $('.btn').on('click', function(e){
   	var briefcase = findBriefCase(this); 
     if(briefcase != undefined){
-      this.classList.add('hide');
+      $(this).addClass('hide');
       disableCashList(briefcase);
     }     
   });
@@ -36,46 +36,46 @@ var shuffle = function (array) {
 }
 
 var renderCashList = function(array) {
-	var statArea = document.querySelector('#statArea');
-  var columnTemplate = document.querySelector('#cashColumn');
-  var cashColumn = columnTemplate.content.querySelector('div');
-  var cashTemplate = document.querySelector('#cash');
-  var cash = cashTemplate.content.querySelector('li');
+  var $statArea = $('#statArea');
+  var $columnTemplate = $('#cashColumn');
+  var $cashColumn = $columnTemplate.find('div');
+  var $cashTemplate = $('#cash');
+  var $cash = $cashTemplate.find('li');
 
-  appendTemplate(statArea,columnTemplate); 
-	for (var i = 0 ; i <= array.length; i++) {
+  $statArea.append($cashColumn.clone()); 
+  var $cashColumnClone = $cashColumn.clone();
+  for (var i = 0 ; i <= array.length; i++) {
        if(i === array.length/2 || i === array.length){
-           appendTemplate(statArea,columnTemplate);  
-           cashColumn.innerHTML = '';      
-       }       
-       cash.innerHTML = array [i];
-       appendTemplate(cashColumn,cashTemplate); 
-	}	
+           $statArea.append($cashColumnClone);  
+           $cashColumnClone = $cashColumn.clone();    
+       } 
+       var $cashClone = $cash.clone();     
+       $cashClone.html(array [i]);
+       $cashColumnClone.append($cashClone); 
+  } 
 }
 
 var renderBriefCases = function(array) {
-	var briefcasesArea = document.querySelector('#briefcasesArea');
-	var rowTemplate = document.querySelector('#briefcaseRow');
-  var briefcaseRow = rowTemplate.content.querySelector('div');
-  var buttonTemplate = document.querySelector('#briefcase');
-  var briefcase = buttonTemplate.content.querySelector('button'); 
+  var $briefcasesArea = $('#briefcasesArea');
+  var $rowTemplate = $('#briefcaseRow');
+  var $briefcaseRow = $rowTemplate.find('div');
+  var $buttonTemplate = $('#briefcase');
+  var $briefcase = $buttonTemplate.find('button'); 
 
-	for (var i = array.length; i >= 0; i--) {            
+  var $briefcaseRowClone = $briefcaseRow.clone();
+  for (var i = array.length; i >= 0; i--) {            
        if(i % 3 === 0){
-       	   appendTemplate(briefcasesArea,rowTemplate); 
-           briefcaseRow.innerHTML='';           
-       }      
-       if(i > 0) {         
-          briefcase.id = array[i-1].briefcaseNo;
-          briefcase.innerHTML = array[i-1].briefcaseNo;
+           $briefcasesArea.append($briefcaseRowClone); 
+           $briefcaseRowClone = $briefcaseRow.clone();          
        }
-       appendTemplate(briefcaseRow,buttonTemplate); 
-	}
-}
 
-var appendTemplate = function(element, template){
-  var clone = document.importNode(template.content, true);
-  element.appendChild(clone);
+       var $briefcaseClone = $briefcase.clone();  
+       if(i > 0) {         
+          $briefcaseClone.attr('id' ,array[i-1].briefcaseNo);
+          $briefcaseClone.html(array[i-1].briefcaseNo);
+       }
+       $briefcaseRowClone.append($briefcaseClone); 
+  }
 }
 
 var findBriefCase = function(element){
@@ -87,16 +87,13 @@ var findBriefCase = function(element){
 }
 
 var disableCashList = function(briefcase){
-  var statArea = document.querySelector('#statArea');
-  var cashList = statArea.querySelectorAll('li');
+  var $statArea = $('#statArea');
+  var cashList = $statArea.find('li');
   for(var i=0; i<cashList.length; i++){
     if (cashList[i].innerHTML === briefcase.cash) {
-         cashList[i].classList.add('disabled');
+         $(cashList[i]).addClass('disabled');
          return;
     }
   }
 }
-
-
-
 
