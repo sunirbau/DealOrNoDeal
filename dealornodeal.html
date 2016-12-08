@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Deal Or No Deal</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/game.css">
+    <script type="text/javascript" src="js/html5shiv.js"></script>    
+  	<script type="text/javascript" src="js/game.js"></script>
+  	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  	
+  </head>
+
+  <body>
+  	<h3>DEAL OR NO DEAL</h3>
+	<div class="container">
+  	  <div class= "row" id="gameArea">
+  	        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id = "briefcasesArea">
+  	  		</div>
+  	  		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id = "playArea">
+  	  		</div>
+  	  		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+  	  		   <div class ="row" id= "statArea">
+  	  		   </div>
+  	  		</div>
+  	  </div>
+	</div>
+
+
+   <!-- template for each briefcase row -->
+   <template id="briefcaseRow">
+       <div class="panel panel-default no-border"/>
+   </template>
+
+   <!-- template for each briefcase -->
+   <template id="briefcase">
+       <button class="briefcase btn btn-primary"/>
+   </template>
+
+   <template id="cashColumn">
+       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 list-group"/>
+   </template>
+
+   <!-- template for each cash in stat area -->
+   <template id="cash">
+   		<li class="list-group-item"></li> 
+   </template>
+
+  </body>
+</html>
